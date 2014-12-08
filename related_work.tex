@@ -1,0 +1,26 @@
+\section{Related Work}
+
+Our algorithm embeds some document properties as sub documents in order to make it easier to reference whatever, our work is related to existing research in database cracking, materialized views, customizing key value stores, and discussions in the MongoDB development community.
+
+\subsection{Materialized views}
+A {\em view} is a function from a set of base tables to a derived table. A {\em materialized view} is where you store tuples of a view in the database. This way, database accesses to the materialized view can be faster than recomputing the view, especially when computing the view is expensive~\cite{Gupta1995}. Materialized views for expensive queries would not work very well if you needed to recompute the materialized view whenever records were added or deleted, so past work has addressed how to efficiently maintain materialized views with incremental updates~\cite{Larson1985,Blakeley1986,Gupta1995,Zhou2007,Zhou2007a}. Other work has provided methods for automatically selecting materialized views for a given workload in cases with lots of data~\cite{Agrawal2000,Yang1997}. 
+
+Materialized views relate to our work because they create and update copies of data to decrease response time for expensive queries. However, materialized views decrease database processing time on subsequent queries whereas we are interested in restructuring our data to decrease the number of round trips to the database. 
+
+\subsection{Column store architecture and database cracking}
+As we are restructuring our data to optimize read time, column store databases and database cracking are related to our project. A {\em column store} relational database stores the values for each attribute contiguously, unlike traditional row store databases that store attributes of a record contiguously~\cite{Stonebraker}. Such column store databases allow the DBMS to read only the values of the columns required for processing a given query so that they perform better in read-mostly applications. Products such as Synbase IQ and KDB have demonstrated that this architecture improves performance~\cite{Stonebraker,French1995}. 
+
+Idreos et al. provide an optimization for column stores called {\em database cracking}~\cite{Pirk2007}. In database cracking, a column $A$ is copied as $A_{CRK}$ when $A$ is first queried. Then, $A_{CRK}$ is physically organized so that the values that satisfy the query are stored in contiguous space. Thus, database cracking speeds up subsequent queries for similar values. Follow up work proposed algorithms for updating cracked databases under high-volume insertions/deletions~\cite{Idreos2007}, and algorithms for increasing efficiency of tuple reconstruction for multi-attribute queries~\cite{Idreos2009}.
+
+We are inspired by these successful methods for copying and reorganizing data to speed up read-heavy applications. However, we can not directly use these methods in our case as they are intended for relational databases and we plan to reorganize data for fast reads on a non-relational database. 
+
+\subsection{Adding functionality to non-relational databases} 
+NoSQL-style databases sacrifice ``one-size-fits-all'' functionality for speed~\cite{Strauch}. Thus, programmers build extra functionality on top of the simple database to satisfy application-specific needs. Many research papers detail systems that supplement NoSQL databases to support complex quereies, ACID properties, and SLAs~\cite{Decandia2007,Chang,Beaver2010,Baker}. 
+
+To our knowledge, no existing academic work addresses how to decrease the number of database round trips required to resolve recursive object relations in document store databases such as MongoDB. The MongoDB manual~\cite{MongoDB2014} and a NoSQL survey paper~\cite{Strauch} notes application categories that inform when to (A) embed related objects and when to (B) reference related objects. However, many applications do not comfortably fit either category. So, application developers wrote guides for denormalizing objects so that you can both embed and reference objects~\cite{Wanschik2010}. Unfortunately, following these guides requires a lot of effort and introduces opportunity for error. Further, no one has qunatified benefits or downsides of denormalizing objects in MongoDB.
+
+Our work creates and evaluates an application that supports denormalizing objects in MongoDB.
+
+
+
+% \bibliography{papers}
