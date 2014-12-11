@@ -1,0 +1,45 @@
+// EXAMPLE POST
+{	
+	"_id": "k7cgWtxQpPQ3gLgxa",
+	"body": "I'm a post about rabbits!",
+	"author": {
+		"_id": "frqejWeGWjDTPMj7P"
+	},
+	"tags": [{
+		"_id": "KMYNwr7TsZvEboXCw"
+	}, {
+		"_id": "tMgj8mF2zF3gjCftS"
+		}]
+}
+
+{	
+	"_id": "k7cgWtxQpPQ3gLgxa",
+	"body": "I'm a post about rabbits!",
+	"author": {
+		"_id": "frqejWeGWjDTPMj7P",
+		"name": "Henry",
+		"picture": "http://img.com/img.jpg"
+	},
+	"tags": [{
+		"_id": "KMYNwr7TsZvEboXCw",
+		"name": "animals"
+	}, {
+		"_id": "tMgj8mF2zF3gjCftS",
+		"name": "information"
+		}]
+}
+
+// EXAMPLE AUTHOR
+{
+	"_id": 19301,
+	"name": "Henry",
+	"bio": "I own rabbits.",
+	"picture": "http://img.com/img.jpg"
+}
+
+// EXAMPLE TAG
+{
+	"_id": 28193,
+	"name": "animals",
+	"description": "This tag is for posts about animals"
+}
