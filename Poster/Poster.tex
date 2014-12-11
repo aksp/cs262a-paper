@@ -101,6 +101,12 @@ Evaluate PeerDB and recommend design guidelines for embedding fields. In particu
 \item Postgres (high-level Django and low-level queries)\\
 \end{itemize}
 
+\vspace{1em}
+
+\includegraphics[width=\linewidth]{schema}
+
+\vspace{1em}
+
 We will offer design guidelines on when to use PeerDB embedded fields versus other methods by varying these parameters:
 \begin{itemize}
 \item Size of fields in related objects
@@ -110,23 +116,16 @@ We will offer design guidelines on when to use PeerDB embedded fields versus oth
 
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Related work}{name=related,column=1,below=goals}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{itemize}
-\item Materialized views
-\item Column stores and database cracking
-\item Customizing NoSQL databases
-\end{itemize}
-
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Comparison results}{name=comparison,column=1, below=related}{
+\headerbox{Comparison results}{name=comparison,column=1, below=goals}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We found that high performance reads of PeerDB come at the expense of slow writes. Based on our evaluation we recommend using postgres for write-heavy applications.
+We found that high performance reads of PeerDB come at the expense of slow writes (figure to the right). Based on our evaluation we recommend using postgres for write-heavy applications. 
+
+\vspace{1em}
+
+\includegraphics[width=\linewidth]{graphs}
 
 }
 
@@ -135,7 +134,7 @@ We found that high performance reads of PeerDB come at the expense of slow write
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Based on our evaluation and use of PeerDB in PeerLibrary we came up with the following design guidelines for picking fields to embed. These design considerations can be automated or handled during schema specification.
-
+\\ 
 \begin{itemize}
 \item Fields to embed are small in size
 \item Values of all embedded fields are shared across all queries
@@ -155,8 +154,20 @@ In addition to making static queries to evaluate PeerDB performance we evaluated
 
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Related work}{name=related,column=2,below=reactive}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{itemize}
+\item Materialized views
+\item Column stores and database cracking
+\item Customizing NoSQL databases
+\end{itemize}
+
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Github links}{name=github,column=2,below=reactive}{
+\headerbox{Github links}{name=github,column=2,below=related}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 PeerDB: github.com/peerlibrary/meteor-peerdb \\
