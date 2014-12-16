@@ -15,3 +15,5 @@ Currently queries are issued and are left to MongoDB to determine that a particu
 
 PeerDB runs as a background process inside Meteor application, observing changes in the database and issuing the updates.
 To scale, it provides a way to run as multiple separate processes/instances to distribute the load, each instance observing and reacting to just a subset of all documents based on their ID.
+
+It is implemented in CoffeeScript and available as open source library at \url{https://github.com/peerlibrary/meteor-peerdb}.
