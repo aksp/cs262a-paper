@@ -68,14 +68,13 @@ breaklinks=true,
 % End of preamble. Here it comes the document.
 \begin{document}
 
-%\title{Skimmable Video Digests for Informational Talks}
-\title{Evaluating PeerDB}
+\title{Performance analysis of joins in reactive queries}
 
-\numberofauthors{1}
+\numberofauthors{2}
 \author{
-   \alignauthor Author Names\\
+   \alignauthor Amy Pavel, Mitar Milutinovic\\
     \affaddr{University of California, Berkeley}\\
-    \email{\{emails\}@cs.berkeley.edu}
+    \email{\{amypavel,mitar\}@berkeley.edu}
 }
 
 \maketitle
@@ -86,13 +85,22 @@ breaklinks=true,
 
 \vspace{-0.08in}
 \keywords{
-	MongoDB, PeerDB, Document stores
+	MongoDB, PeerDB, PostgreSQL, Document stores, Reactive quries
 }
 
 \vspace{-0.08in}
 
+\input{introduction}
 
 \input{related_work}
+
+\input{peerdb_description}
+
+\input{benchmarking}
+
+\input{automatic_algorithm}
+
+\input{future_work}
 
 
 % Balancing columns in a ref list is a bit of a pain because you
