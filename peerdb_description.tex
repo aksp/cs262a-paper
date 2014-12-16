@@ -3,7 +3,11 @@
 PeerDB is implemented as a library for Meteor web framework.
 It provides a declarative way to define database schema for documents and relations between document for your Meteor web application.
 Together with specifying relations, you can also specify which fields should be embedded as subdocuments for both forward and backwards relations.
-It provides also an easy way to define generator fields (fields which value is computed based on values of other fields) and generic triggers.
+Currently, PeerDB requires programmer to decide if and which fields to embed.
+That decision can often be made on program's logic and profiling of queries, in a similar way one would be deciding about existence of an index on a field.
+Both embedding and indexes make a trade-off between faster read times on an expense of write times.
+
+Additionally, PeerDB provides an easy way to define generator fields (fields which value is computed based on values of other fields) and generic triggers.
 
 It uses an abstraction over MongoDB oplog to implement all above mentioned features.
 MongoDB oplog originally serves for replication among multiple MongoDB instances, sending a stream of all changes from master to slaves.
