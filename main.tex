@@ -64,7 +64,6 @@ breaklinks=true,
 % create a shortcut to typeset table headings
 \newcommand\tabhead[1]{\small\textbf{#1}}
 
-
 % End of preamble. Here it comes the document.
 \begin{document}
 
@@ -72,9 +71,12 @@ breaklinks=true,
 
 \numberofauthors{2}
 \author{
-   \alignauthor Amy Pavel, Mitar Milutinovic\\
+   \alignauthor Amy Pavel\\
     \affaddr{University of California, Berkeley}\\
-    \email{\{amypavel,mitar\}@berkeley.edu}
+    \email{amypavel@berkeley.edu}
+   \alignauthor Mitar Milutinovic\\
+    \affaddr{University of California, Berkeley}\\
+    \email{mitar@berkeley.edu}
 }
 
 \maketitle
@@ -85,7 +87,7 @@ breaklinks=true,
 
 \vspace{-0.08in}
 \keywords{
-	MongoDB, PeerDB, PostgreSQL, Document stores, Reactive quries
+	MongoDB, PeerDB, PostgreSQL, Document stores, Reactive queries
 }
 
 \vspace{-0.08in}
@@ -99,6 +101,8 @@ breaklinks=true,
 \input{benchmarking}
 
 \input{automatic_algorithm}
+
+\input{conclusions}
 
 \input{future_work}
 
