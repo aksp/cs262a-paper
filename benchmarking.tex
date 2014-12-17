@@ -209,21 +209,21 @@ We varied the type of a running program and parameters when running an image to 
 
 \begin{figure}%
 \begin{tikzpicture}[
-	y=.03cm,
+	y=.04cm,
 	x=2.3cm,
 	semithick,
 	scale=0.65
 ]
 
-\draw[color=olive,thick] node[anchor=west] at (1.1,250) {\small PostgreSQL Python Django};
-\draw[color=teal,thick] node[anchor=west] at (1.1,230) {\small PostgreSQL Python only};
-\draw[color=green,thick] node[anchor=west] at (1.1,210) {\small MongoDB Python only};
-\draw[color=red,thick] node[anchor=west] at (1.1,190) {\small MongoDB Meteor only};
-\draw[color=blue,thick] node[anchor=west] at (1.1,170) {\small MongoDB Meteor PeerDB};
+\draw[color=olive,thick] node[anchor=west] at (1.1,220) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.1,205) {\small PostgreSQL Python only};
+\draw[color=green,thick] node[anchor=west] at (1.1,190) {\small MongoDB Python only};
+\draw[color=red,thick] node[anchor=west] at (1.1,175) {\small MongoDB Meteor only};
+\draw[color=blue,thick] node[anchor=west] at (1.1,160) {\small MongoDB Meteor PeerDB};
 %\draw[color=brown,thick] node[anchor=west] at (1.1,2200) {\small MongoDB Python PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (5.2,0);
-\draw[->] (1,0) -- coordinate (y axis) (1,250);
+\draw[->] (1,0) -- coordinate (y axis) (1,220);
 \foreach \x in {1,2,...,5}
 	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {%
 		\pgfkeys{/pgf/fpu=true}%
@@ -231,7 +231,7 @@ We varied the type of a running program and parameters when running an image to 
 		\pgfmathprintnumber[fixed]{\pgfmathresult}%
 		\pgfkeys{/pgf/fpu=false}%
 	};
-\foreach \y in {0,50,...,200}
+\foreach \y in {0,25,...,200}
 	\draw[xshift=2.3cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
 \node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields (bytes)};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
@@ -257,10 +257,10 @@ We varied the type of a running program and parameters when running an image to 
 ]
 
 \draw[color=red,thick] node[anchor=west] at (1.1,6500) {\small MongoDB Meteor only};
-\draw[color=blue,thick] node[anchor=west] at (1.1,6200) {\small MongoDB Meteor PeerDB};
-\draw[color=olive,thick] node[anchor=west] at (1.1,5900) {\small PostgreSQL Python Django};
-\draw[color=teal,thick] node[anchor=west] at (1.1,5600) {\small PostgreSQL Python only};
-\draw[color=green,thick] node[anchor=west] at (1.1,5300) {\small MongoDB Python only};
+\draw[color=blue,thick] node[anchor=west] at (1.1,6100) {\small MongoDB Meteor PeerDB};
+\draw[color=olive,thick] node[anchor=west] at (1.1,5700) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.1,5300) {\small PostgreSQL Python only};
+\draw[color=green,thick] node[anchor=west] at (1.1,4900) {\small MongoDB Python only};
 %\draw[color=brown,thick] node[anchor=west] at (1.1,2200) {\small MongoDB Python PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (5.2,0);
@@ -291,17 +291,17 @@ We varied the type of a running program and parameters when running an image to 
 
 \begin{figure}%
 \begin{tikzpicture}[
-	y=.008cm,
+	y=.0013cm,
 	x=2.3cm,
 	semithick,
 	scale=0.65
 ]
 
-\draw[color=red,thick] node[anchor=west] at (1.1,1000) {\small MongoDB Meteor PeerDB};
+\draw[color=red,thick] node[anchor=west] at (1.1,7200) {\small MongoDB Meteor PeerDB};
 %\draw[color=blue,thick] node[anchor=west] at (1.1,900) {\small MongoDB Python PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (5.2,0);
-\draw[->] (1,0) -- coordinate (y axis) (1,1100);
+\draw[->] (1,0) -- coordinate (y axis) (1,7500);
 \foreach \x in {1,2,...,5}
 	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {%
 		\pgfkeys{/pgf/fpu=true}%
@@ -309,7 +309,7 @@ We varied the type of a running program and parameters when running an image to 
 		\pgfmathprintnumber[fixed]{\pgfmathresult}%
 		\pgfkeys{/pgf/fpu=false}%
 	};
-\foreach \y in {0,200,...,1000}
+\foreach \y in {0,1000,...,7500}
 	\draw[xshift=2.3cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
 \node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields (bytes)};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};

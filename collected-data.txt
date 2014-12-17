@@ -9,6 +9,7 @@ read /mongodb-meteor-peerdb-1
 /benchmark/jsons/size_00100.json 0.028
 /benchmark/jsons/size_01000.json 0.076
 /benchmark/jsons/size_10000.json 0.11
+/benchmark/jsons/size_100000.json 0.058
 write /mongodb-meteor-peerdb-1
 /benchmark/jsons/number_00001.json 23.899 380.612
 /benchmark/jsons/number_00002.json 45.898 1016.93
@@ -20,6 +21,7 @@ write /mongodb-meteor-peerdb-1
 /benchmark/jsons/size_00100.json 26.377 388.161
 /benchmark/jsons/size_01000.json 80.005 342.081
 /benchmark/jsons/size_10000.json 605.479 1017.93
+/benchmark/jsons/size_100000.json 5794.858 6900.088
 read /mongodb-meteor-collection
 /benchmark/jsons/number_00001.json 5.008
 /benchmark/jsons/number_00002.json 25.976
