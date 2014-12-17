@@ -11,6 +11,7 @@ However, we have not quantitatively evaluated PeerDB to find out whether it impr
 We contribute a comparison of read and write times between three system: PeerDB, MongoDB and PostgreSQL. 
 In addition, we make each comparison with both low-level queries and high-level web applications. 
 We find that although PeerDB contributes to faster reads than other systems under some conditions, this performance gain comes with trade-offs (e.g. write time and traffic). 
+
 To help developers manage these trade-offs when choosing which fields to embed, we propose and evaluate a new algorithm for automatically selecting which fields to embed based on a given read and write workload. 
 Our algorithm compares many possible configurations using a novel cost model to predict expected impact, then returns the lowest cost configuration.
 We test our algorithm under different workloads and parameter settings.
