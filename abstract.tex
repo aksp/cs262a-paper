@@ -1,1 +1,17 @@
-Abstract stuffs
+Simple document-oriented databases like MongoDB forgo many traditional features of relational databases in favor of better performance. 
+This means that applications often need to build additional features on top of the simple provided features. 
+For example, applications often have to resolve relationships between stored documents. 
+Recursive queries incurred by resolving relationships introduce delays. 
+To mitigate such delays, we developed PeerDB, a modification to MongoDB. 
+PeerDB optimizes for the common use case where the main document only requires a subset of fields from any related documents. 
+PeerDB stores subsets of related fields as subdocuments of the main document. 
+In theory, this modification should reduce existing recursive read delays as applications will no longer need to recursively query documents in many cases. 
+However, we have not quantitatively evaluated PeerDB to find out whether it improves performance of MongoDB. In addition, there is no method for automatically selecting which fields to embed using PeerDB.
+
+We contribute a comparison of read and write times between three system: PeerDB, MongoDB and PostgreSQL. 
+In addition, we make each comparison with both low-level queries and high-level web applications. 
+We find that although PeerDB contributes to faster reads than other systems under some conditions, this performance gain comes with trade-offs (e.g. write time and traffic). 
+
+To help developers manage these trade-offs when choosing which fields to embed, we propose and evaluate a new algorithm for automatically selecting which fields to embed based on a given read and write workload. 
+Our algorithm compares many possible configurations using a novel cost model to predict expected impact, then returns the lowest cost configuration.
+We test our algorithm under different workloads and parameter settings.

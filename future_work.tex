@@ -1,1 +1,16 @@
 \section{Future work}
+Our work leads to three main directions for future work: improvements of PeerDB, additional benchmarking, improvements to the automatic embedding algorithm and evaluation.
+This section will address each of these future work areas in turn.
+
+\subsection{Improving PeerDB}
+
+\subsection{Benchmarking}
+
+\subsection{Automatic algorithm}
+One direction for improving the automatic algorithm is extending it's applicability to more use cases. For instance, the algorithm does not currently consider all possible sets of queries (only those that strictly augment the smallest set). In future work, we extend the model to encompass more query sets. As mentioned before, future work may also extend the algorithm to handle cases where we embed entire subdocuments without having the document seperately referenced (no help from PeerDB). In addition, we want to extend it to handle reverse queries. Lastly, we will augment the automatic algorithm with a more global view of the workload and system so that we could jointly figure out embeddings for all documents at one time.
+
+Another direction for improving the automatic algorithm is verifying and enhancing the accuracy of the cost model and input parameters. 
+Future work could learn parameters, simulate possible configurations for greater accuracy, and compare our current cost model closely to actual system performance. 
+We could also evaluate low cost configurations using our benchmarking system against high cost configurations to see if relative performance for these configurations confirms intution.
+
+One final direction for improving the automatic algorithm is assuring that it works at scale. Currently, our algorithm uses brute force to calculate the lowest cost embeddings. In cases where there are more possible combinations of embeddings we could use an existing optimization technique to find an approximate configuration. For instance, we could apply simulated annealing or a greedy approach.

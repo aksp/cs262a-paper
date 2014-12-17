@@ -10,7 +10,7 @@ Because each of those documents are stand-alone and static, it is relatively eas
 Such an approach is quick and it scales horizontally easily, but the downside is the multiple round trips you have to do in your code to get all documents you are interested in.
 In modern web applications where program logic is often running directly in the browser, accessing data through a web API, those round trips become even worse because those queries are coming over the Internet where latency is much higher.
 
-\begin{figure}[!h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.9\columnwidth]{messages-many}
 \caption{In traditional SQL, one query is needed to obtain data spawning multiple relations, but such results can be potentially large and time to compute joins is needed.
@@ -25,12 +25,12 @@ This allows you (or a framework you use) to respond to this changes in data.
 For example, update a rendered template in a browser.
 Programming in this way becomes much more declarative.
 
-The downside is complexity a programer is faced with when making queries with joins.
+The downside is complexity a programmer is faced with when making queries with joins.
 While frameworks provide a simple to use primitive for making reactive queries against one MongoDB collection and receiving updates to documents in that collection as they are made for the open query, programming how manually resolved relations should respond to those updates in data is far from straightforward.
 Community is slowly building libraries which are aiming to address these issues, but current solutions are made for specific type of queries and all share a common issue based on previously mentioned downside of manually resolving queries: high latency and number of queries.
 As query results data is changed, queries for related documents have to be rerun again and again, even if the results of those new queries might not be different to previous ones, or even if only a smaller query for just a subset of documents would satisfy.
 
-Thus, combination of joins in NoSQL databases with reactive queries pose a challenge to programers.
+Thus, combination of joins in NoSQL databases with reactive queries pose a challenge to programmers.
 Luckily, we can observe that in many cases we are mostly interested only in few fields of a related document, again and again.
 Instead of recomputing joins every time we read, we could use MongoDB's sub-documents feature to embed those fields along with the reference.
 Instead of just storing the \verb|_id| of a related document, we could store also those few often used fields.
@@ -107,10 +107,12 @@ To address this issue and make easier for a programmer to embed subdocuments of 
 Programmer can now in a declarative way specify relations between documents and which fields they would like to embed.
 They have to define those references once and then PeerDB makes sure data stays in sync as it is changed across documents.
 It does not matter where the changes come from, it will detect them and update fields in referenced sub-documents accordingly.
-
 Instead of having to make recursive queries every time you read documents with related documents, PeerDB make those recursive queries once and store them into embedded documents.
 The downside is that every modification to the data in the database triggers updates in documents in other collections.
 While modifications to the document are stored quickly, changes have to propagate across all other documents.
+
 To better understand performance characteristics of PeerDB we first present its implementation and then performance analysis approach and results.
-Based on insights from performance analysis we follow by presenting an automatic algorithm to determine when to use embedding and when not to.
+We find that PeerDB performs better for reads than MongoDB alone and PostgreSQL for our benchmarks, when we manually select which fields to embed. 
+Next, we present an algorithm to automatically pick which fields to embed based on expected impact of reads and writes under a user-specified workload. 
+We find that our algorithm produces results that agree with intuition.
 We conclude with our observations and discuss possible future work.

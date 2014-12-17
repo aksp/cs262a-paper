@@ -80,10 +80,14 @@ As a result, the algorithm does not embed the author picture to avoid fetching i
 Setting the parameters to $w_R = 0, w_W = 1, w_T = 0$ (only considering writes), the algorithm tells us to not embed any fields, because every embedded field incurs extra write time.
 Finally, setting the parameters to only pay attention to the messages passed, $w_R = 0, w_W = 0, w_T = 1$ we get that we should embed all fields except author bio and tag description. 
 The algorithm picks this configuration because we provided a read-heavy workload, and each non-embedded field requires extra messages to read. 
-In this case, if we set the parameters to $w_R = 1, w_W = 1, w_T = 0$ we unsurprisingly get the same configuration as suggested by considering the read time alone. 
 
-However, if we switch the expected read values in the workload specification with the expected write values in the specification and leave the parameters as  $w_R = 1, w_W = 1, w_T = 0$, the algorithm tells us to not embed any fields. %TODO CHECK THIS LAST ONE 
+For this schema and workload, if we set the parameters to $w_R = 1, w_W = 1, w_T = 0$ we unsurprisingly get the same configuration as suggested by considering the read time alone. 
+However, if we switch the expected read values in the workload specification with the expected write values in the specification and leave the parameters as  $w_R = 1, w_W = 1, w_T = 0$, the algorithm tells us to not embed any fields. 
+
 Overall, our algorithm agrees with intuition in these cases. Such an algorithm can pick the lowest cost fields to embed based on a schema and an expected workload specification.
+
+\subsection{Implementation}
+This algorithm was implemented in unoptimized Python code on a MacBook Pro. Each run of the algorithm to consider all embeddings and return the lowest cost configuration took around ~2ms.
 
 \begin{figure}[t]
 \centering

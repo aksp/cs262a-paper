@@ -1,6 +1,6 @@
 \section{Related Work}
 
-Our work is related to existing research in database cracking, materialized views, customizing key value stores, and discussions in the MongoDB development community.
+PeerDB is related to existing research in database cracking, materialized views, customizing key value stores, and discussions in the MongoDB development community. Our automatic embedding algorithm is related to work in automatically tuning databases.
 
 \subsection{Materialized views}
 
@@ -32,14 +32,14 @@ We are inspired by these successful methods for copying and reorganizing data to
 
 NoSQL-style databases sacrifice ``one-size-fits-all'' functionality for speed~\cite{Strauch}.
 Thus, programmers build extra functionality on top of the simple database to satisfy application-specific needs.
-Many research papers detail systems that supplement NoSQL databases to support complex quereies, ACID properties, and SLAs~\cite{Decandia2007,Chang,Beaver2010,Baker}. 
+Many research papers detail systems that supplement NoSQL databases to support complex queries, ACID properties, and SLAs~\cite{Decandia2007,Chang,Beaver2010,Baker}. 
 
 To our knowledge, no existing academic work addresses how to decrease the number of database round trips required to resolve recursive object relations in document store databases such as MongoDB.
 The MongoDB manual~\cite{MongoDB2014} and a NoSQL survey paper~\cite{Strauch} notes application categories that inform when to (A) embed related objects and when to (B) reference related objects.
 However, many applications do not comfortably fit either category.
-So, application developers wrote guides for denormalizing objects so that you can both embed and reference objects~\cite{Wanschik2010}.
+So, application developers wrote guides for normalizing objects so that you can both embed and reference objects~\cite{Wanschik2010}.
 Unfortunately, following these guides requires a lot of effort and introduces opportunity for error.
-Further, no one has qunatified benefits or downsides of denormalizing objects in MongoDB.
+Further, no one has quantified benefits or downsides of denormalizing objects in MongoDB.
 
 \subsection{Automatically tuning databases}
 Our work provides an algorithm to automatically suggest which fields to embed for a given workload. 
@@ -47,7 +47,7 @@ Therefore, work on automatically tuning databases is relevant.
 
 Several past works suggest methods for automatically selecting database indexes and materialized views~\cite{Goldstein2001,Zilio2004,Gupta2005,Yang1997,Agrawal2000}. We were particularly inspired by the work of Agrawal et. al. which enumerated many configurations of materialized views, then compared the configurations based on their expected impact on the sum of the cost of queries in a workload~\cite{Agrawal2000}. Many follow up papers followed a similar methodology~\cite{Goldstein2001,Zilio2004,Gupta2005}.
 
-As these works are intended for specific SQL configurations, we could not directly apply these methods. However, our algorithm is structured similarly to the algorithm proposed in~\cite{Agrawal2000}: we enumerate many configurations of embbedded fields, then compare these configurations based on their expected impact on the sum of the cost of reads and writes of a given workload. 
+As these works are intended for specific SQL configurations, we could not directly apply these methods. However, our algorithm is structured similarly to the algorithm proposed in~\cite{Agrawal2000}: we enumerate many configurations of embedded fields, then compare these configurations based on their expected impact on the sum of the cost of reads and writes of a given workload. 
 We propose and evaluate a novel cost model to evaluate proposed configurations of embedded vs. referenced fields based on a given workload. 
 
 %\bibliography{papers}
