@@ -107,10 +107,12 @@ To address this issue and make easier for a programmer to embed subdocuments of 
 Programmer can now in a declarative way specify relations between documents and which fields they would like to embed.
 They have to define those references once and then PeerDB makes sure data stays in sync as it is changed across documents.
 It does not matter where the changes come from, it will detect them and update fields in referenced sub-documents accordingly.
-
 Instead of having to make recursive queries every time you read documents with related documents, PeerDB make those recursive queries once and store them into embedded documents.
 The downside is that every modification to the data in the database triggers updates in documents in other collections.
 While modifications to the document are stored quickly, changes have to propagate across all other documents.
+
 To better understand performance characteristics of PeerDB we first present its implementation and then performance analysis approach and results.
-Based on insights from performance analysis we follow by presenting an automatic algorithm to determine when to use embedding and when not to.
+We find that PeerDB performs better for reads than MongoDB alone and PostgreSQL for our benchmarks, when we manually select which fields to embed. 
+Next, we present an algorithm to automatically pick which fields to embed based on expected impact of reads and writes under a user-specified workload. 
+We find that our algorithm produces results that agree with intuition.
 We conclude with our observations and discuss possible future work.
