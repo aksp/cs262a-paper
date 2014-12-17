@@ -1,0 +1,54 @@
+\section{Automated embedded field selection}
+PeerDB lets you embed fields to obtain faster reads on those fields at the expense of more time for writes and higher network traffic. For the benchmarks, we chose which fields to embed from the post object. Here we present a general algorithm for picking fields to embed in an object based on the expected impact of embedding vs referencing a given set of fields from that object. 
+
+\subsection{Overview}
+Our algorithm is intended to optimize the configuration of embedded fields in a main document $D$ according to a workload specification. To do this, we consider all possible configurations of embedding fields in $D$, assign a cost to each configuration, and pick the best configuration according to our cost model.
+
+\subsection{Workload specification}
+For queries to a given document, $D$, users need to supply how often they will query each all document fields and fields in related documents $D_R$. Specifically, for all fields $f_i \in D, D_R$ users specify, an expected frequency of reads originating from $D$ for each field, $E_R(f_i)$, an expected frequency of writes for each field, $E_W(f_i)$, and an expected size of each field $E_S(f_i)$. 
+
+\subsection{Cost model}
+Our cost model assigns a cost to a document configuration \{$C = c_1, c_2, ... c_n | c_i = 1 \text{ if field } f_i \in D_R \text{ is embedded }$\} considering expected read time, $R$, write time $W$, and network traffic $T$ under a given workload specification, $S$.
+$$Cost(C,S) = w_R*R + w_W*W + w_T*T$$ 
+The parameters $w_R$ and $w_W$ allow the user to set the importance of the read-time and write-time respectively. For instance, the user may set the $w_R$ higher than $w_W$ in the case that website visitors read documents, but only admins write documents. As we do not consider the network traffic of calls other than those for the given document and it's fields, $w_T$ can be used to adjust the importance of keeping network traffic of these document calls to a minimum. 
+
+\subsubsection{Computing read-time term, $R$}
+The read-time term takes into account the read-times for all document fields and referenced document fields in a given configuration, $C$, for a given workload, $S$. $F$ means all fields $f_i$. We define $F_0$ as all fields $f_i$ where $c_i = 0$ and $F_1$ as all fields $f_i$ where $c_i = 1$. $F_D$ encompasses all fields in the base document which are not assigned in the configuration. The equation for $R$ also takes into account the time to request data, $M$, and the time to read one KB of data $K$:
+\begin{align*}
+R =& [M + max(E_R(f_i) \forall f_i \in F_1 \cup F_D)*\sum_{f_i \in F_1 \cup F_D} K*E_S(f_i)\\
+& + \sum_{D_{R_i} \in D_R} \{M + max(E_R(f_i) \forall f_i \in D_{R_i} \cap F_0)\\
+& * \sum_{f_i \in D_{R_i} \cap F_0} K*E_S(f_i)\} + P]
+\end{align*}
+The first summation calculates the read time for all embedded fields, and the second summation takes into account the secondary data requests for referrenced object and data transfer for all fields in those objects. So, embedding a field saves the secondary request for data and avoids transfering all data in the referenced object. Therefore, it is helpful in cases where the cost of a secondary request is high (e.g. across servers) or where the referenced object is large. Because we assume we read all data from each document when we fetch it, the $max$ terms calculate how many times we need to fetch each document to match the required field reads.
+
+$P$ is the penalty for inconsistency. If a read occurs before the write data is consistent, the read must recursively reference the referred object. For each embedded object, we add back on the time to retrieve the referenced object multiplied by the chance that the field is read while the data is in consistent, $I(f_i)$, which depends the frequency of writes and reads. Here $D_{R_{F_1}}$ refers to all documents that have an embedded field.
+$$P = I*\sum_{D_{R_i} \in D_{R_{F_1}}} [M+\sum_{f_i \in D_{R_i}} K*E_S(f_i)*E_R(f_i)]$$
+
+
+\subsubsection{Computing average field write-time $W$}
+The write-time term takes into account the write times for all $f_i \in D, D_R$ for a given configuration $C$ and workload $S$. The first summation takes into account time for embedded fields, and the second summation counts time for all fields. This is because embedded fields require two writes to update the referenced object and the embedded field whereas referenced objects only take one write.
+\begin{align*}
+W =& [\sum_{f_i \in F_1} K*E_S(f_i)*E_W(f_i)\\
+& + \sum_{f_i \in F} K*E_S(f_i)*E_W(f_i)]
+\end{align*}
+\subsubsection{Computing network traffic, $T$}
+We add the term $T$ with its weight $w_T$ to allow the user to adjust how important it is to keep the network traffic from PeerDB low. $T$ is the average number of messages passed based on reads and writes. 
+\begin{align*}
+T=& 2*|D\text{ reads}| + 2*|D_R\text{ reads}|\\
+& + 4*|\text{embedded writes}| + 2*|\text{referenced writes}| 
+\end{align*}
+
+\subsection{Picking a configuration}
+The total number of possible configurations is equal to $2^n$ where $n$ is the number of fields. In our implemnentation we use a brute force approach to find the configuration with the lowest cost because $n$ is small. In cases where $n$ is large we can apply a greedy algorithm or simulated annealing to find a near-optimal answer.
+
+\subsection{Evaluation}
+We implemented our model and tested it on one schema under several different workload specifications and parameter weightings. Here, we provide the schema, and a few of the workloads, and parameter settings, then discuss the configurations produced by our model for each combination. 
+
+EVALUATION FIGURES GO HERE
+
+In future work we will rigorously test our model to make sure it matches the benchmark expectations.
+
+\subsection{Discussion}
+Although useful for many applications, our model makes several simplifications. For instance, our model does not take into account the reverse field feature of PeerDB. Further, our model does not take into account the possibility of embedding an entire referenced document instead of using PeerDB. Embedding without PeerDB the document instead of providing a reference is helpful in cases where you only reference the embedded document from the parent document~\cite{MongoDB2014}. In the future, we will add this option by augmenting the model and workload specification to include querying documents aside from the main document $D$. Our model also assumes that you read all information in a document when you fetch it. In the future we could let the user specify which combinations of fields they would read and adjust our cost model to handle such specifications.
+
+We also made other minor simplifications, such as using the same constants $K$ and $M$ for all writes and reads. In reality, these numbers are different for writes and reads. In the future, we could provide an application to learn these constants for any given system. 
