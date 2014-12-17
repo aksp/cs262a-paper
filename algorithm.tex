@@ -84,7 +84,7 @@ The algorithm picks this configuration because we provided a read-heavy workload
 For this schema and workload, if we set the parameters to $w_R = 1, w_W = 1, w_T = 0$ we unsurprisingly get the same configuration as suggested by considering the read time alone. 
 However, if we switch the expected read values in the workload specification with the expected write values in the specification and leave the parameters as  $w_R = 1, w_W = 1, w_T = 0$, the algorithm tells us to not embed any fields. 
 
-Overall, our algorithm agrees with intuition in these cases. Such an algorithm can pick the lowest cost fields to embed based on a schema and an expected workload specification.
+Overall, our algorithm agrees with intuition in these cases. Such an algorithm can pick the lowest cost fields to embed based on a schema and an expected workload specification. In future work we will rigorously test our model to make sure it matches the benchmark expectations. 
 
 \subsection{Implementation}
 This algorithm was implemented in unoptimized Python code on a MacBook Pro. Each run of the algorithm to consider all embeddings and return the lowest cost configuration took around ~2ms.
@@ -117,8 +117,6 @@ This algorithm was implemented in unoptimized Python code on a MacBook Pro. Each
   \label{workload}
   \vspace{-4mm}
 \end{table}
-
-In future work we will rigorously test our model to make sure it matches the benchmark expectations. 
 
 \subsection{Discussion}
 Although useful for many applications, our model makes several simplifications. 
