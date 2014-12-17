@@ -8,9 +8,8 @@ A {\em view} is a function from a set of base tables to a derived table.
 A {\em materialized view} is where you store tuples of a view in the database itself.
 This way, database accesses to the materialized view can be faster than recomputing the view, especially when computing the view is expensive~\cite{Gupta1995}.
 Materialized views for expensive queries would not work very well if you needed to recompute the materialized view whenever records were added or deleted, so past work has addressed how to efficiently maintain materialized views with incremental updates~\cite{Larson1985,Blakeley1986,Gupta1995,Zhou2007,Zhou2007a}.
-Other work has provided methods for automatically selecting materialized views for a given workload in cases with lots of data~\cite{Agrawal2000,Yang1997}. 
 
-Materialized views relate to our work because they create and update copies of data to decrease response time for expensive queries.
+In general, materialized views relate to our work because they create and update copies of data to decrease response time for expensive queries.
 While materialized views can be constructed for arbitrary SQL query, PeerDB limits embedding only to fields for natural joins between documents.
 By this it simplifies logic and addresses the most common use case.
 
@@ -42,6 +41,15 @@ So, application developers wrote guides for denormalizing objects so that you ca
 Unfortunately, following these guides requires a lot of effort and introduces opportunity for error.
 Further, no one has qunatified benefits or downsides of denormalizing objects in MongoDB.
 
-% indexes and automatic decision
+\subsection{Automatically tuning databases}
+Our work provides an algorithm to automatically suggest which fields to embed for a given workload. 
+Therefore, work on automatically tuning databases is relevant. 
 
+Several past works suggest methods for automatically selecting database indexes and materialized views~\cite{Goldstein2001,Zilio2004,Gupta2005,Yang1997,Agrawal2000}. We were particularly inspired by the work of Agrawal et. al. which enumerated many configurations of materialized views, then compared the configurations based on their expected impact on the sum of the cost of queries in a workload~\cite{Agrawal2000}. Many follow up papers followed a similar methodology~\cite{Goldstein2001,Zilio2004,Gupta2005}.
+
+As these works are intended for specific SQL configurations, we could not directly apply these methods. However, our algorithm is structured similarly to the algorithm proposed in~\cite{Agrawal2000}: we enumerate many configurations of embbedded fields, then compare these configurations based on their expected impact on the sum of the cost of reads and writes of a given workload. 
+We propose and evaluate a novel cost model to evaluate proposed configurations of embedded vs. referenced fields based on a given workload. 
+
+%\bibliography{papers}
+% indexes and automatic decision
 % TODO: Add related work about automatic algorithm
