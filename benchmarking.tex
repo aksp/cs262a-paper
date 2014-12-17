@@ -85,10 +85,10 @@ Basic number of documents used in the benchmark are shown in table \ref{numbers}
 Basic number of tags per post was 10.
 We uniformly distributed all comments across all blog posts. For future work we could consider using a long-tailed distribution.
 
-We scaled this basic numbers to vary:
+We scaled this basic numbers and sizes to vary:
 \begin{itemize}
 \item number of documents, we used multiplication factors 1, 2, 4, 6, 8, 10
-\item size of person picture, tag description, and comment body fields in documents, we used multiplication factors 1, 10, 100, 1000, 10000, 100000
+\item size of person picture, tag description, and comment body fields in documents, we used sizes 10, 100, 1000, 10000, 100000
 \end{itemize}
 
 When varying one dimension we kept the other at its basic value.
@@ -212,5 +212,105 @@ We varied the type of a running program and parameters when running an image to 
 \end{tikzpicture}%
 \caption{number-converge}%
 \label{number-converge}%
+\end{figure}
+
+\begin{figure}%
+\begin{tikzpicture}[
+	y=.03cm,
+	x=0.00009cm,
+	semithick,
+	scale=0.65
+]
+
+\draw[color=olive,thick] node[anchor=west] at (1.2,250) {\small postgresql-python-django-size-read};
+\draw[color=teal,thick] node[anchor=west] at (1.2,230) {\small postgresql-python-only-size-read};
+\draw[color=green,thick] node[anchor=west] at (1.2,210) {\small mongodb-python-nopeerdb-size-read};
+\draw[color=red,thick] node[anchor=west] at (1.2,190) {\small mongodb-meteor-collection-size-read};
+\draw[color=blue,thick] node[anchor=west] at (1.2,170) {\small mongodb-meteor-peerdb-1-size-read};
+%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small mongodb-python-peerdb-1-size-read};
+
+\draw[->] (1,0) -- coordinate (x axis) (110000,0);
+\draw[->] (1,0) -- coordinate (y axis) (1,250);
+\foreach \x in {0,25000,50000,75000,100000}
+	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
+\foreach \y in {0,50,...,200}
+	\draw[xshift=0cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields};
+\node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
+
+\draw[color=red,thick] plot[mark=x,smooth] file {mongodb-meteor-collection-size-read.txt};
+\draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-meteor-peerdb-1-size-read.txt};
+\draw[color=green,thick] plot[mark=x,smooth] file {mongodb-python-nopeerdb-size-read.txt};
+%\draw[color=brown,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-size-read.txt};
+\draw[color=olive,thick] plot[mark=x,smooth] file {postgresql-python-django-size-read.txt};
+\draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-size-read.txt};
+
+\end{tikzpicture}%
+\caption{size-read}%
+\label{size-read}%
+\end{figure}
+
+\begin{figure}%
+\begin{tikzpicture}[
+	y=.0015cm,
+	x=0.00009cm,
+	semithick,
+	scale=0.65
+]
+
+\draw[color=red,thick] node[anchor=west] at (1.2,6500) {\small mongodb-meteor-collection-size-write};
+\draw[color=blue,thick] node[anchor=west] at (1.2,6200) {\small mongodb-meteor-peerdb-1-size-write};
+\draw[color=olive,thick] node[anchor=west] at (1.2,5900) {\small postgresql-python-django-size-write};
+\draw[color=teal,thick] node[anchor=west] at (1.2,5600) {\small postgresql-python-only-size-write};
+\draw[color=green,thick] node[anchor=west] at (1.2,5300) {\small mongodb-python-nopeerdb-size-write};
+%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small mongodb-python-peerdb-1-size-write};
+
+\draw[->] (1,0) -- coordinate (x axis) (110000,0);
+\draw[->] (1,0) -- coordinate (y axis) (0,6500);
+\foreach \x in {0,25000,50000,75000,100000}
+	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
+\foreach \y in {0,1000,...,6500}
+	\draw[xshift=0cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields};
+\node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
+
+\draw[color=red,thick] plot[mark=x,smooth] file {mongodb-meteor-collection-size-write.txt};
+\draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-meteor-peerdb-1-size-write.txt};
+\draw[color=green,thick] plot[mark=x,smooth] file {mongodb-python-nopeerdb-size-write.txt};
+%\draw[color=brown,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-size-write.txt};
+\draw[color=olive,thick] plot[mark=x,smooth] file {postgresql-python-django-size-write.txt};
+\draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-size-write.txt};
+
+\end{tikzpicture}%
+\caption{size-write}%
+\label{size-write}%
+\end{figure}
+
+\begin{figure}%
+\begin{tikzpicture}[
+	y=.008cm,
+	x=.0008cm,
+	semithick,
+	scale=0.65
+]
+
+\draw[color=red,thick] node[anchor=west] at (1.2,1000) {\small mongodb-meteor-peerdb-1-size-converge};
+%\draw[color=blue,thick] node[anchor=west] at (1.2,900) {\small mongodb-python-peerdb-1-size-converge};
+
+\draw[->] (1,0) -- coordinate (x axis) (11000,0);
+\draw[->] (1,0) -- coordinate (y axis) (0,1100);
+\foreach \x in {0,2500,...,11000}
+	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
+\foreach \y in {0,200,...,1000}
+	\draw[xshift=0cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields};
+\node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
+
+\draw[color=red,thick] plot[mark=x,smooth] file {mongodb-meteor-peerdb-1-size-converge.txt};
+%\draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-size-converge.txt};
+
+\end{tikzpicture}%
+\caption{size-converge}%
+\label{size-converge}%
 \end{figure}
 
