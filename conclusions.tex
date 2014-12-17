@@ -1,1 +1,6 @@
 \section{Conclusions}
+We have described and evaluated the PeerDB system. 
+In particular, we have shown that PeerDB outperforms MongoDB and PostgreSQL in read mostly workloads under some conditions. 
+We also displayed that this performacne increase comes at the expense of higher write times and more network traffic. 
+To help developers manage these trade offs, we have presented and evaluated an automatic algorithm to suggest a low cost configuration with a given workload.
+Overall, this paper contributes an evaluation which suggests benefts of embedding fields with PeerDB, and algorithms to automatically pick which fields to embed. 
