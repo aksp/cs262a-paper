@@ -1,0 +1,128 @@
+read /mongodb-meteor-peerdb-1
+/benchmark/jsons/number_00001.json 0.041
+/benchmark/jsons/number_00002.json 0.036
+/benchmark/jsons/number_00004.json 0.097
+/benchmark/jsons/number_00006.json 0.248
+/benchmark/jsons/number_00008.json 0.174
+/benchmark/jsons/number_00010.json 0.211
+/benchmark/jsons/size_00010.json 0.02
+/benchmark/jsons/size_00100.json 0.028
+/benchmark/jsons/size_01000.json 0.076
+/benchmark/jsons/size_10000.json 0.11
+write /mongodb-meteor-peerdb-1
+/benchmark/jsons/number_00001.json 23.899 380.612
+/benchmark/jsons/number_00002.json 45.898 1016.93
+/benchmark/jsons/number_00004.json 119.677 2748.701
+/benchmark/jsons/number_00006.json 243.081 10052.281
+/benchmark/jsons/number_00008.json 973.138 24034.381
+/benchmark/jsons/number_00010.json 1414.801 55638.716
+/benchmark/jsons/size_00010.json 21.92 369.467
+/benchmark/jsons/size_00100.json 26.377 388.161
+/benchmark/jsons/size_01000.json 80.005 342.081
+/benchmark/jsons/size_10000.json 605.479 1017.93
+read /mongodb-meteor-collection
+/benchmark/jsons/number_00001.json 5.008
+/benchmark/jsons/number_00002.json 25.976
+/benchmark/jsons/number_00004.json 156.851
+/benchmark/jsons/number_00006.json 414.081
+/benchmark/jsons/number_00008.json 663.668
+/benchmark/jsons/number_00010.json 1260.429
+/benchmark/jsons/size_00010.json 5.912
+/benchmark/jsons/size_00100.json 6.167
+/benchmark/jsons/size_01000.json 7.727
+/benchmark/jsons/size_10000.json 14.26
+/benchmark/jsons/size_100000.json 50.016
+write /mongodb-meteor-collection
+/benchmark/jsons/number_00001.json 29.882
+/benchmark/jsons/number_00002.json 42.864
+/benchmark/jsons/number_00004.json 83.462
+/benchmark/jsons/number_00006.json 118.839
+/benchmark/jsons/number_00008.json 150.485
+/benchmark/jsons/number_00010.json 164.554
+/benchmark/jsons/size_00010.json 18.969
+/benchmark/jsons/size_00100.json 29.417
+/benchmark/jsons/size_01000.json 106.018
+/benchmark/jsons/size_10000.json 751.701
+/benchmark/jsons/size_100000.json 6141.745
+read /mongodb-python-peerdb-1
+/benchmark/jsons/number_00001.json 0.762693881989
+/benchmark/jsons/number_00002.json 3.8302500248
+/benchmark/jsons/number_00004.json 25.3643538952
+/benchmark/jsons/number_00006.json 86.1809151173
+write /mongodb-python-peerdb-1
+/benchmark/jsons/number_00001.json 2.02086496353 445.890133858
+/benchmark/jsons/number_00002.json 2.71091508865 1578.64820194
+/benchmark/jsons/number_00004.json 5.78322720528 7409.32414913
+/benchmark/jsons/number_00006.json 11.821475029 39514.0418739
+read /mongodb-python-nopeerdb
+/benchmark/jsons/number_00001.json 3.06924390793
+/benchmark/jsons/number_00002.json 14.7482948303
+/benchmark/jsons/number_00004.json 77.3952100277
+/benchmark/jsons/number_00006.json 225.049157858
+/benchmark/jsons/number_00008.json 438.277140856
+/benchmark/jsons/number_00010.json 777.990418911
+/benchmark/jsons/size_00010.json 2.91381907463
+/benchmark/jsons/size_00100.json 3.02819085121
+/benchmark/jsons/size_01000.json 3.45605802536
+/benchmark/jsons/size_10000.json 8.94508910179
+/benchmark/jsons/size_100000.json 57.9018750191
+write /mongodb-python-nopeerdb
+/benchmark/jsons/number_00001.json 1.72201800346
+/benchmark/jsons/number_00002.json 4.0242099762
+/benchmark/jsons/number_00004.json 5.74569487572
+/benchmark/jsons/number_00006.json 8.29750990868
+/benchmark/jsons/number_00008.json 11.5361399651
+/benchmark/jsons/number_00010.json 14.2722411156
+/benchmark/jsons/size_00010.json 1.06120085716
+/benchmark/jsons/size_00100.json 2.16868901253
+/benchmark/jsons/size_01000.json 6.47807312012
+/benchmark/jsons/size_10000.json 57.0698549747
+/benchmark/jsons/size_100000.json 573.390842915
+read /postgresql-python-django
+/benchmark/jsons/number_00001.json 14.4154989719
+/benchmark/jsons/number_00002.json 64.843064785
+/benchmark/jsons/number_00004.json 276.11018014
+/benchmark/jsons/number_00006.json 722.4250319
+/benchmark/jsons/number_00008.json 1798.867594
+/benchmark/jsons/number_00010.json 3065.44767499
+/benchmark/jsons/size_00010.json 15.9732408524
+/benchmark/jsons/size_00100.json 15.2303218842
+/benchmark/jsons/size_01000.json 23.7161979675
+/benchmark/jsons/size_10000.json 51.6209578514
+/benchmark/jsons/size_100000.json 212.076074839
+write /postgresql-python-django
+/benchmark/jsons/number_00001.json 152.36848402
+/benchmark/jsons/number_00002.json 330.431357861
+/benchmark/jsons/number_00004.json 1239.24721193
+/benchmark/jsons/number_00006.json 2685.73795915
+/benchmark/jsons/number_00008.json 4928.15940905
+/benchmark/jsons/number_00010.json 9081.08401895
+/benchmark/jsons/size_00010.json 90.1477930546
+/benchmark/jsons/size_00100.json 90.8475089073
+/benchmark/jsons/size_01000.json 95.0869400501
+/benchmark/jsons/size_10000.json 145.896097898
+/benchmark/jsons/size_100000.json 655.349671125
+read /postgresql-python-only
+/benchmark/jsons/number_00001.json 2.98802304268
+/benchmark/jsons/number_00002.json 20.3967339993
+/benchmark/jsons/number_00004.json 136.500102043
+/benchmark/jsons/number_00006.json 389.143756866
+/benchmark/jsons/number_00008.json 759.505686045
+/benchmark/jsons/number_00010.json 1513.24135399
+/benchmark/jsons/size_00010.json 2.98321795464
+/benchmark/jsons/size_00100.json 3.20046710968
+/benchmark/jsons/size_01000.json 4.32091093063
+/benchmark/jsons/size_10000.json 15.2256159782
+/benchmark/jsons/size_100000.json 62.9424219131
+write /postgresql-python-only
+/benchmark/jsons/number_00001.json 8.93761897087
+/benchmark/jsons/number_00002.json 23.1479568481
+/benchmark/jsons/number_00004.json 80.4823479652
+/benchmark/jsons/number_00006.json 146.082255125
+/benchmark/jsons/number_00008.json 228.51276803
+/benchmark/jsons/number_00010.json 251.325489998
+/benchmark/jsons/size_00010.json 8.37708210945
+/benchmark/jsons/size_00100.json 8.74991798401
+/benchmark/jsons/size_01000.json 13.5908508301
+/benchmark/jsons/size_10000.json 67.1420230865
+/benchmark/jsons/size_100000.json 594.28303504
