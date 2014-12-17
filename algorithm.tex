@@ -32,14 +32,14 @@ R =& [M + max(E_R(f_i) \forall f_i \in F_1 \cup F_D)*\sum_{f_i \in F_1 \cup F_D}
 & * \sum_{f_i \in D_{R_i} \cap F_0} K*E_S(f_i)\} + P]
 \end{align*}
 The first summation calculates the expected read time for all document fields ($F_D$) and embedded fields ($F_1$). 
-The second summation adds the expected read time for all secondary requests for referrenced documents and all time required to read the fields ($F_0$) of those documents. 
+The second summation adds the expected read time for all secondary requests for referenced documents and all time required to read the fields ($F_0$) of those documents. 
 Because we assume we read all data from each document when we fetch it, the $max$ terms calculate how many times we need to fetch each document to match the required field reads. 
 Overall, this equation shows that embedding a field saves read time for secondary requests incurred by referenced documents and their fields. 
 We can see that embedding fields will decrease read-time in cases where the cost of a secondary request is high, or where the referenced documents are large.
 
 Finally, $P$ is the penalty for inconsistency. 
 If a read occurs before the write data is consistent, the read must recursively reference the referred document. 
-$P$ accounts for the additional time for reacursively referencing the referred document as it was not covered in the other summations. 
+$P$ accounts for the additional time for recursively referencing the referred document as it was not covered in the other summations. 
 For each embedded document, we add back on the time to retrieve the referenced document multiplied by the chance that the field is read while the data is in consistent, $I(f_i)$, which depends the frequency of writes and reads. 
 Here $D_{R_{F_1}}$ refers to all documents that have an embedded field. 
 $$P = I*\sum_{D_{R_i} \in D_{R_{F_1}}} [M+\sum_{f_i \in D_{R_i}} K*E_S(f_i)*E_R(f_i)]$$
@@ -66,7 +66,7 @@ T=& 2*|D\text{ reads}| + 2*|D_R\text{ reads}|\\
 
 \subsection{Picking a configuration}
 The total number of possible configurations for any schema is $2^n$ where $n$ represents the number of fields in referenced documents. 
-In our implemnentation, $n$ is small so we use a brute force approach to find the configuration with the lowest cost. 
+In our implementation, $n$ is small so we use a brute force approach to find the configuration with the lowest cost. 
 In cases where $n$ is large, we could apply a greedy algorithm or simulated annealing to find a near-optimal answer.
 
 \subsection{Evaluation}
