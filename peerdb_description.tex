@@ -1,0 +1,23 @@
+\section{PeerDB implementation}
+
+PeerDB is implemented as a library for Meteor web framework.
+It provides a declarative way to define database schema for documents and relations between document for your Meteor web application.
+Together with specifying relations, you can also specify which fields should be embedded as subdocuments for both forward and backwards relations.
+Currently, PeerDB requires programmer to decide if and which fields to embed.
+That decision can often be made on program's logic and profiling of queries, in a similar way one would be deciding about existence of an index on a field.
+Both embedding and indexes make a trade-off between faster read times on an expense of write times.
+
+Additionally, PeerDB provides an easy way to define generator fields (fields which value is computed based on values of other fields) and generic triggers.
+
+It uses an abstraction over MongoDB oplog to implement all above mentioned features.
+MongoDB oplog originally serves for replication among multiple MongoDB instances, sending a stream of all changes from master to slaves.
+We can connect to this same oplog to observe all changes in the database and determine if a change is connected to a field which is embedded in a related document.
+If this is so, PeerDB issues update queries which update all those fields in subdocuments in related documents.
+
+As currently implemented, PeerDB issues updates queries in a straightforward way, without any optimizations which might reduce the number of unnecessary updates queries.
+Currently queries are issued and are left to MongoDB to determine that a particular query does not have anything to update.
+
+PeerDB runs as a background process inside Meteor application, observing changes in the database and issuing the updates.
+To scale, it provides a way to run as multiple separate processes/instances to distribute the load, each instance observing and reacting to just a subset of all documents based on their ID.
+
+It is implemented in CoffeeScript and available as open source library at \url{https://github.com/peerlibrary/meteor-peerdb}.

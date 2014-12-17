@@ -64,18 +64,19 @@ breaklinks=true,
 % create a shortcut to typeset table headings
 \newcommand\tabhead[1]{\small\textbf{#1}}
 
-
 % End of preamble. Here it comes the document.
 \begin{document}
 
-%\title{Skimmable Video Digests for Informational Talks}
-\title{Evaluating PeerDB}
+\title{Performance analysis of joins in reactive queries}
 
-\numberofauthors{1}
+\numberofauthors{2}
 \author{
-   \alignauthor Author Names\\
+   \alignauthor Amy Pavel\\
     \affaddr{University of California, Berkeley}\\
-    \email{\{emails\}@cs.berkeley.edu}
+    \email{amypavel@berkeley.edu}
+   \alignauthor Mitar Milutinovic\\
+    \affaddr{University of California, Berkeley}\\
+    \email{mitar@berkeley.edu}
 }
 
 \maketitle
@@ -86,14 +87,25 @@ breaklinks=true,
 
 \vspace{-0.08in}
 \keywords{
-	MongoDB, PeerDB, Document stores
+	MongoDB, PeerDB, PostgreSQL, Document stores, Reactive queries
 }
 
 \vspace{-0.08in}
 
+\input{introduction}
 
 \input{related_work}
 \input{algorithm}
+
+\input{peerdb_description}
+
+\input{benchmarking}
+
+\input{automatic_algorithm}
+
+\input{conclusions}
+
+\input{future_work}
 
 
 % Balancing columns in a ref list is a bit of a pain because you
