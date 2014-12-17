@@ -123,7 +123,7 @@ We varied the type of a running program and parameters when running an image to 
 \foreach \x in {1,...,10}
 	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
 \foreach \y in {0,250,...,3000}
-	\draw[xshift=1cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+	\draw[xshift=1.1cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
 \node[below=1.2cm,anchor=base] at (x axis) {Number of documents multiplier};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
 
@@ -135,7 +135,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-number-read.txt};
 
 \end{tikzpicture}%
-\caption{Read time vs. number of documents. Number of documents is shown as a multiplier of basic numbers shown in table \ref{numbers}.}%
+\caption{Read time vs. number of documents. Number of documents is shown as a multiplier of basic numbers from table \ref{numbers}.}%
 \label{number-read}%
 \end{figure}
 
@@ -159,7 +159,7 @@ We varied the type of a running program and parameters when running an image to 
 \foreach \x in {1,...,10}
 	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
 \foreach \y in {0,250,...,3000}
-	\draw[xshift=1cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+	\draw[xshift=1.1cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
 \node[below=1.2cm,anchor=base] at (x axis) {Number of documents multiplier};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
 
@@ -173,7 +173,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-number-write.txt};
 
 \end{tikzpicture}%
-\caption{Write time vs. number of documents. Number of documents is shown as a multiplier of basic numbers shown in table \ref{numbers}.}%
+\caption{Write time vs. number of documents. Number of documents is shown as a multiplier of basic numbers from table \ref{numbers}.}%
 \label{number-write}%
 \end{figure}
 
@@ -192,15 +192,8 @@ We varied the type of a running program and parameters when running an image to 
 \draw[->] (1,0) -- coordinate (y axis) (1,45000);
 \foreach \x in {1,...,10}
 	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
-\draw[xshift=1cm] (0pt,0) -- (-3pt,0) node[anchor=east] {$0$};
-\draw[xshift=1cm] (0pt,5000) -- (-3pt,5000) node[anchor=east] {$5000$};
-\draw[xshift=1cm] (0pt,10000) -- (-3pt,10000) node[anchor=east] {$10000$};
-\draw[xshift=1cm] (0pt,15000) -- (-3pt,15000) node[anchor=east] {$15000$};
-\draw[xshift=1cm] (0pt,20000) -- (-3pt,20000) node[anchor=east] {$20000$};
-\draw[xshift=1cm] (0pt,25000) -- (-3pt,25000) node[anchor=east] {$25000$};
-\draw[xshift=1cm] (0pt,30000) -- (-3pt,30000) node[anchor=east] {$30000$};
-\draw[xshift=1cm] (0pt,35000) -- (-3pt,35000) node[anchor=east] {$35000$};
-\draw[xshift=1cm] (0pt,40000) -- (-3pt,40000) node[anchor=east] {$40000$};
+\foreach \y in {0,5000,10000,15000,20000,25000,30000,35000,40000}
+	\draw[xshift=1.1cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
 \node[below=1.2cm,anchor=base] at (x axis) {Number of documents multiplier};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
 
@@ -210,32 +203,37 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-number-converge.txt};
 
 \end{tikzpicture}%
-\caption{Convergence time vs. number of documents. Number of documents is shown as a multiplier of basic numbers shown in table \ref{numbers}.}%
+\caption{Convergence time vs. number of documents. Number of documents is shown as a multiplier of basic numbers from table \ref{numbers}.}%
 \label{number-converge}%
 \end{figure}
 
 \begin{figure}%
 \begin{tikzpicture}[
 	y=.03cm,
-	x=0.00009cm,
+	x=2.3cm,
 	semithick,
 	scale=0.65
 ]
 
-\draw[color=olive,thick] node[anchor=west] at (1.2,250) {\small PostgreSQL Python Django};
-\draw[color=teal,thick] node[anchor=west] at (1.2,230) {\small PostgreSQL Python only};
-\draw[color=green,thick] node[anchor=west] at (1.2,210) {\small MongoDB Python only};
-\draw[color=red,thick] node[anchor=west] at (1.2,190) {\small MongoDB Meteor only};
-\draw[color=blue,thick] node[anchor=west] at (1.2,170) {\small MongoDB Meteor PeerDB};
-%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small MongoDB Python PeerDB};
+\draw[color=olive,thick] node[anchor=west] at (1.1,250) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.1,230) {\small PostgreSQL Python only};
+\draw[color=green,thick] node[anchor=west] at (1.1,210) {\small MongoDB Python only};
+\draw[color=red,thick] node[anchor=west] at (1.1,190) {\small MongoDB Meteor only};
+\draw[color=blue,thick] node[anchor=west] at (1.1,170) {\small MongoDB Meteor PeerDB};
+%\draw[color=brown,thick] node[anchor=west] at (1.1,2200) {\small MongoDB Python PeerDB};
 
-\draw[->] (1,0) -- coordinate (x axis) (110000,0);
+\draw[->] (1,0) -- coordinate (x axis) (5.2,0);
 \draw[->] (1,0) -- coordinate (y axis) (1,250);
-\foreach \x in {0,25000,50000,75000,100000}
-	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
+\foreach \x in {1,2,...,5}
+	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {%
+		\pgfkeys{/pgf/fpu=true}%
+		\pgfmathparse{pow(10,\x)}%
+		\pgfmathprintnumber[fixed]{\pgfmathresult}%
+		\pgfkeys{/pgf/fpu=false}%
+	};
 \foreach \y in {0,50,...,200}
-	\draw[xshift=0cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
-\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields};
+	\draw[xshift=2.3cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields (bytes)};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
 
 \draw[color=red,thick] plot[mark=x,smooth] file {mongodb-meteor-collection-size-read.txt};
@@ -246,32 +244,37 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-size-read.txt};
 
 \end{tikzpicture}%
-\caption{Read time vs. size of embedded fields. Size is shown in bytes.}%
+\caption{Read time vs. size of embedded fields.}%
 \label{size-read}%
 \end{figure}
 
 \begin{figure}%
 \begin{tikzpicture}[
 	y=.0015cm,
-	x=0.00009cm,
+	x=2.3cm,
 	semithick,
 	scale=0.65
 ]
 
-\draw[color=red,thick] node[anchor=west] at (1.2,6500) {\small MongoDB Meteor only};
-\draw[color=blue,thick] node[anchor=west] at (1.2,6200) {\small MongoDB Meteor PeerDB};
-\draw[color=olive,thick] node[anchor=west] at (1.2,5900) {\small PostgreSQL Python Django};
-\draw[color=teal,thick] node[anchor=west] at (1.2,5600) {\small PostgreSQL Python only};
-\draw[color=green,thick] node[anchor=west] at (1.2,5300) {\small MongoDB Python only};
-%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small MongoDB Python PeerDB};
+\draw[color=red,thick] node[anchor=west] at (1.1,6500) {\small MongoDB Meteor only};
+\draw[color=blue,thick] node[anchor=west] at (1.1,6200) {\small MongoDB Meteor PeerDB};
+\draw[color=olive,thick] node[anchor=west] at (1.1,5900) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.1,5600) {\small PostgreSQL Python only};
+\draw[color=green,thick] node[anchor=west] at (1.1,5300) {\small MongoDB Python only};
+%\draw[color=brown,thick] node[anchor=west] at (1.1,2200) {\small MongoDB Python PeerDB};
 
-\draw[->] (1,0) -- coordinate (x axis) (110000,0);
-\draw[->] (1,0) -- coordinate (y axis) (0,6500);
-\foreach \x in {0,25000,50000,75000,100000}
-	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
+\draw[->] (1,0) -- coordinate (x axis) (5.2,0);
+\draw[->] (1,0) -- coordinate (y axis) (1,6500);
+\foreach \x in {1,2,...,5}
+	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {%
+		\pgfkeys{/pgf/fpu=true}%
+		\pgfmathparse{pow(10,\x)}%
+		\pgfmathprintnumber[fixed]{\pgfmathresult}%
+		\pgfkeys{/pgf/fpu=false}%
+	};
 \foreach \y in {0,1000,...,6500}
-	\draw[xshift=0cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
-\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields};
+	\draw[xshift=2.3cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields (bytes)};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
 
 \draw[color=red,thick] plot[mark=x,smooth] file {mongodb-meteor-collection-size-write.txt};
@@ -282,35 +285,40 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-size-write.txt};
 
 \end{tikzpicture}%
-\caption{Write time vs. size of embedded fields. Size is shown in bytes.}%
+\caption{Write time vs. size of embedded fields.}%
 \label{size-write}%
 \end{figure}
 
 \begin{figure}%
 \begin{tikzpicture}[
 	y=.008cm,
-	x=.0008cm,
+	x=2.3cm,
 	semithick,
 	scale=0.65
 ]
 
-\draw[color=red,thick] node[anchor=west] at (1.2,1000) {\small MongoDB Meteor PeerDB};
-%\draw[color=blue,thick] node[anchor=west] at (1.2,900) {\small MongoDB Python PeerDB};
+\draw[color=red,thick] node[anchor=west] at (1.1,1000) {\small MongoDB Meteor PeerDB};
+%\draw[color=blue,thick] node[anchor=west] at (1.1,900) {\small MongoDB Python PeerDB};
 
-\draw[->] (1,0) -- coordinate (x axis) (11000,0);
-\draw[->] (1,0) -- coordinate (y axis) (0,1100);
-\foreach \x in {0,2500,...,11000}
-	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {$\x$};
+\draw[->] (1,0) -- coordinate (x axis) (5.2,0);
+\draw[->] (1,0) -- coordinate (y axis) (1,1100);
+\foreach \x in {1,2,...,5}
+	\draw (\x,0pt) -- (\x,-3pt) node[anchor=north] {%
+		\pgfkeys{/pgf/fpu=true}%
+		\pgfmathparse{pow(10,\x)}%
+		\pgfmathprintnumber[fixed]{\pgfmathresult}%
+		\pgfkeys{/pgf/fpu=false}%
+	};
 \foreach \y in {0,200,...,1000}
-	\draw[xshift=0cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
-\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields};
+	\draw[xshift=2.3cm] (0pt,\y) -- (-3pt,\y) node[anchor=east] {$\y$};
+\node[below=1.2cm,anchor=base] at (x axis) {Size of embedded fields (bytes)};
 \node[left=1.2cm,rotate=90,anchor=base] at (y axis) {Time (s)};
 
 \draw[color=red,thick] plot[mark=x,smooth] file {mongodb-meteor-peerdb-1-size-converge.txt};
 %\draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-size-converge.txt};
 
 \end{tikzpicture}%
-\caption{Convergance time vs. size of embedded fields. Size is shown in bytes.}%
+\caption{Convergance time vs. size of embedded fields.}%
 \label{size-converge}%
 \end{figure}
 
