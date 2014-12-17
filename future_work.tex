@@ -3,9 +3,11 @@ Our work leads to three main directions for future work: improvements of PeerDB,
 This section will address each of these future work areas in turn.
 
 \subsection{Improving PeerDB}
-One way to improve PeerDB is to further optimize queries. As PeerDB is decoupled from the database management system, it is unable to take advantage of its information to optimize queries. In the future, we could more closely integrate PeerDB with the underlying database to better optimize queries. 
-
-Further, PeerDB does not handle detection of update loops. In the future, we could apply existing loop detection algorithms to figure out when a loop occurs in the system.
+One way to improve PeerDB is to further optimize queries. 
+As PeerDB is decoupled from the database management system, it is unable to take advantage of its information to optimize queries. 
+In the future, we could more closely integrate PeerDB with the underlying database to better optimize queries. 
+Further, PeerDB does not handle detection of update loops. 
+In the future, we could apply existing loop detection algorithms to figure out when a loop occurs in the system.
 
 \subsection{Benchmarking PeerDB}
 We benchmarked PeerDB and compared it to other databases considering several variables and implementations. In the future, we will run more real-world benchmarks based on modeling our data to reflect real world trends (e.g. long tail comment distributions). 
