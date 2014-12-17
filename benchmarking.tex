@@ -111,12 +111,12 @@ We varied the type of a running program and parameters when running an image to 
 	scale=0.65
 ]
 
-\draw[color=olive,thick] node[anchor=west] at (1.2,3000) {\small postgresql-python-django-number-read};
-\draw[color=teal,thick] node[anchor=west] at (1.2,2800) {\small postgresql-python-only-number-read};
-\draw[color=red,thick] node[anchor=west] at (1.2,2600) {\small mongodb-meteor-collection-number-read};
-\draw[color=green,thick] node[anchor=west] at (1.2,2400) {\small mongodb-python-nopeerdb-number-read};
-\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small mongodb-python-peerdb-1-number-read};
-\draw[color=blue,thick] node[anchor=west] at (1.2,2000) {\small mongodb-meteor-peerdb-1-number-read};
+\draw[color=olive,thick] node[anchor=west] at (1.2,3000) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.2,2800) {\small PostgreSQL Python only};
+\draw[color=red,thick] node[anchor=west] at (1.2,2600) {\small MongoDB Meteor only};
+\draw[color=green,thick] node[anchor=west] at (1.2,2400) {\small MongoDB Python only};
+\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small MongoDB Python PeerDB};
+\draw[color=blue,thick] node[anchor=west] at (1.2,2000) {\small MongoDB Meteor PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (10.5,0);
 \draw[->] (1,0) -- coordinate (y axis) (1,3100);
@@ -135,7 +135,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-number-read.txt};
 
 \end{tikzpicture}%
-\caption{number-read}%
+\caption{Read time vs. number of documents. Number of documents is shown as a multiplier of basic numbers shown in table \ref{numbers}.}%
 \label{number-read}%
 \end{figure}
 
@@ -147,12 +147,12 @@ We varied the type of a running program and parameters when running an image to 
 	scale=0.65
 ]
 
-\draw[color=olive,thick] node[anchor=west] at (1.2,3000) {\small postgresql-python-django-number-write};
-\draw[color=blue,thick] node[anchor=west] at (1.2,2800) {\small mongodb-meteor-peerdb-1-number-write};
-\draw[color=teal,thick] node[anchor=west] at (1.2,2600) {\small postgresql-python-only-number-write};
-\draw[color=red,thick] node[anchor=west] at (1.2,2400) {\small mongodb-meteor-collection-number-write};
-\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small mongodb-python-peerdb-1-number-write};
-\draw[color=green,thick] node[anchor=west] at (1.2,2000) {\small mongodb-python-nopeerdb-number-write};
+\draw[color=olive,thick] node[anchor=west] at (1.2,3000) {\small PostgreSQL Python Django};
+\draw[color=blue,thick] node[anchor=west] at (1.2,2800) {\small MongoDB Meteor PeerDB};
+\draw[color=teal,thick] node[anchor=west] at (1.2,2600) {\small PostgreSQL Python only};
+\draw[color=red,thick] node[anchor=west] at (1.2,2400) {\small MongoDB Meteor only};
+\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small MongoDB Python PeerDB};
+\draw[color=green,thick] node[anchor=west] at (1.2,2000) {\small MongoDB Python only};
 
 \draw[->] (1,0) -- coordinate (x axis) (10.5,0);
 \draw[->] (1,0) -- coordinate (y axis) (1,3100);
@@ -173,7 +173,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-number-write.txt};
 
 \end{tikzpicture}%
-\caption{number-write}%
+\caption{Write time vs. number of documents. Number of documents is shown as a multiplier of basic numbers shown in table \ref{numbers}.}%
 \label{number-write}%
 \end{figure}
 
@@ -185,8 +185,8 @@ We varied the type of a running program and parameters when running an image to 
 	scale=0.65
 ]
 
-\draw[color=blue,thick] node[anchor=west] at (1.2,45000) {\small mongodb-python-peerdb-1-number-converge};
-\draw[color=red,thick] node[anchor=west] at (1.2,42000) {\small mongodb-meteor-peerdb-1-number-converge};
+\draw[color=blue,thick] node[anchor=west] at (1.2,45000) {\small MongoDB Python PeerDB};
+\draw[color=red,thick] node[anchor=west] at (1.2,42000) {\small MongoDB Meteor PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (10.5,0);
 \draw[->] (1,0) -- coordinate (y axis) (1,45000);
@@ -210,7 +210,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-number-converge.txt};
 
 \end{tikzpicture}%
-\caption{number-converge}%
+\caption{Convergence time vs. number of documents. Number of documents is shown as a multiplier of basic numbers shown in table \ref{numbers}.}%
 \label{number-converge}%
 \end{figure}
 
@@ -222,12 +222,12 @@ We varied the type of a running program and parameters when running an image to 
 	scale=0.65
 ]
 
-\draw[color=olive,thick] node[anchor=west] at (1.2,250) {\small postgresql-python-django-size-read};
-\draw[color=teal,thick] node[anchor=west] at (1.2,230) {\small postgresql-python-only-size-read};
-\draw[color=green,thick] node[anchor=west] at (1.2,210) {\small mongodb-python-nopeerdb-size-read};
-\draw[color=red,thick] node[anchor=west] at (1.2,190) {\small mongodb-meteor-collection-size-read};
-\draw[color=blue,thick] node[anchor=west] at (1.2,170) {\small mongodb-meteor-peerdb-1-size-read};
-%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small mongodb-python-peerdb-1-size-read};
+\draw[color=olive,thick] node[anchor=west] at (1.2,250) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.2,230) {\small PostgreSQL Python only};
+\draw[color=green,thick] node[anchor=west] at (1.2,210) {\small MongoDB Python only};
+\draw[color=red,thick] node[anchor=west] at (1.2,190) {\small MongoDB Meteor only};
+\draw[color=blue,thick] node[anchor=west] at (1.2,170) {\small MongoDB Meteor PeerDB};
+%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small MongoDB Python PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (110000,0);
 \draw[->] (1,0) -- coordinate (y axis) (1,250);
@@ -246,7 +246,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-size-read.txt};
 
 \end{tikzpicture}%
-\caption{size-read}%
+\caption{Read time vs. size of embedded fields. Size is shown in bytes.}%
 \label{size-read}%
 \end{figure}
 
@@ -258,12 +258,12 @@ We varied the type of a running program and parameters when running an image to 
 	scale=0.65
 ]
 
-\draw[color=red,thick] node[anchor=west] at (1.2,6500) {\small mongodb-meteor-collection-size-write};
-\draw[color=blue,thick] node[anchor=west] at (1.2,6200) {\small mongodb-meteor-peerdb-1-size-write};
-\draw[color=olive,thick] node[anchor=west] at (1.2,5900) {\small postgresql-python-django-size-write};
-\draw[color=teal,thick] node[anchor=west] at (1.2,5600) {\small postgresql-python-only-size-write};
-\draw[color=green,thick] node[anchor=west] at (1.2,5300) {\small mongodb-python-nopeerdb-size-write};
-%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small mongodb-python-peerdb-1-size-write};
+\draw[color=red,thick] node[anchor=west] at (1.2,6500) {\small MongoDB Meteor only};
+\draw[color=blue,thick] node[anchor=west] at (1.2,6200) {\small MongoDB Meteor PeerDB};
+\draw[color=olive,thick] node[anchor=west] at (1.2,5900) {\small PostgreSQL Python Django};
+\draw[color=teal,thick] node[anchor=west] at (1.2,5600) {\small PostgreSQL Python only};
+\draw[color=green,thick] node[anchor=west] at (1.2,5300) {\small MongoDB Python only};
+%\draw[color=brown,thick] node[anchor=west] at (1.2,2200) {\small MongoDB Python PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (110000,0);
 \draw[->] (1,0) -- coordinate (y axis) (0,6500);
@@ -282,7 +282,7 @@ We varied the type of a running program and parameters when running an image to 
 \draw[color=teal,thick] plot[mark=x,smooth] file {postgresql-python-only-size-write.txt};
 
 \end{tikzpicture}%
-\caption{size-write}%
+\caption{Write time vs. size of embedded fields. Size is shown in bytes.}%
 \label{size-write}%
 \end{figure}
 
@@ -294,8 +294,8 @@ We varied the type of a running program and parameters when running an image to 
 	scale=0.65
 ]
 
-\draw[color=red,thick] node[anchor=west] at (1.2,1000) {\small mongodb-meteor-peerdb-1-size-converge};
-%\draw[color=blue,thick] node[anchor=west] at (1.2,900) {\small mongodb-python-peerdb-1-size-converge};
+\draw[color=red,thick] node[anchor=west] at (1.2,1000) {\small MongoDB Meteor PeerDB};
+%\draw[color=blue,thick] node[anchor=west] at (1.2,900) {\small MongoDB Python PeerDB};
 
 \draw[->] (1,0) -- coordinate (x axis) (11000,0);
 \draw[->] (1,0) -- coordinate (y axis) (0,1100);
@@ -310,7 +310,20 @@ We varied the type of a running program and parameters when running an image to 
 %\draw[color=blue,thick] plot[mark=x,smooth] file {mongodb-python-peerdb-1-size-converge.txt};
 
 \end{tikzpicture}%
-\caption{size-converge}%
+\caption{Convergance time vs. size of embedded fields. Size is shown in bytes.}%
 \label{size-converge}%
 \end{figure}
 
+Results of measurements based on varying number of related documents are shown in figures \ref{number-read}, \ref{number-write}, and \ref{number-converge}.
+One can see that reads are in general much faster in MongoDB than in PosgreSQL and that low-level approaches are faster as well.
+It is clear that reading is fastest using Meteor and PeerDB and stays constant no matter the number of related documents as it is always needed to read only one document instead of multiple for relations.
+
+Write times show that Django does not scale well as number of inserts increases. There is unexplained growth for when using Meteor PeerDB once we grow over a certain threshold, but in general writes are quick.
+
+On the other side figure \ref{number-write} shows the downside of using PeerDB. Convergence times are huge as PeerDB takes time to make sure everything is consistent.
+More changes are made, longer this time is.
+In this case we made many changes at once and then waited for all updates to finish.
+
+Figures \ref{size-read}, \ref{size-write}, and \ref{size-converge} show measurements when we varied size of embedded documents. When reading, size matter initially, but later all except Django converge to approximately the same times, when time to transfer overpowers everything else. Similarly when writing, it seems that main time is taken when transmitting data once fields become large. It seems that writing is slow with Meteor, probably because of all the serialization and deserialization which is taking place internally.
+
+Convergence time grows, but not as drastically as when we are varying number of documents, because number of PeerDB update queries is staying the same and it seems that number of them is the main reason why convergence takes time.
