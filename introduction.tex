@@ -10,7 +10,7 @@ Because each of those documents are stand-alone and static, it is relatively eas
 Such an approach is quick and it scales horizontally easily, but the downside is the multiple round trips you have to do in your code to get all documents you are interested in.
 In modern web applications where program logic is often running directly in the browser, accessing data through a web API, those round trips become even worse because those queries are coming over the Internet where latency is much higher.
 
-\begin{figure}[!h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.9\columnwidth]{messages-many}
 \caption{In traditional SQL, one query is needed to obtain data spawning multiple relations, but such results can be potentially large and time to compute joins is needed.
