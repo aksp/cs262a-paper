@@ -1,25 +1,25 @@
 \section{Automated embedded field selection}
 PeerDB lets you embed fields to obtain faster reads on those fields at the expense of more time for writes and higher network traffic. 
-For the benchmarks, we chose which fields to embed from the post object. 
-Here we present a general algorithm for picking fields to embed in an object based on the expected impact of embedding vs referencing a given set of fields from that object. 
+For the benchmarks, we manually selected which fields to embed for the post document. 
+Here we present a general algorithm for picking fields to embed in document based on the expected impact of embedding vs referencing a set of fields under a given workload.
 
 \subsection{Overview}
-Our algorithm is intended to optimize the configuration of embedded fields in a main document $D$ according to a workload specification. 
-For instance, if a post document $D$ references an author document, you could choose to embed all of the author's fields, none of the authors fields or some combination of these options. 
+Our algorithm optimizes the configuration of embedded fields in a main document $D$ according to a workload specification. 
+For instance, if a post document $D$ references an author document, we could choose to embed all of the author's fields, none of the authors fields or some combination of these options. 
 To choose between many possible configurations, our algorithm takes into account the expected field read and field write workloads specified by the user along with expected field size. 
-Then, we assign a cost to each configuration based on an approximate cost model. The algorithm returns the user the lowest cost configuration. 
-The user can use this configuration to specify which fields to embed under their expected workload.
+Then, the algorithm assigns a cost to each configuration based on an approximate cost model. The algorithm returns the user the lowest cost configuration. 
+The user uses this configuration to specify which fields to embed under their expected workload.
 
 \subsection{Workload specification}
 For queries to a given document, $D$, users need to supply how often they will query each all document fields and fields in related documents $D_R$. 
 Specifically, for all fields $f_i \in D, D_R$ users specify, an expected frequency of reads originating from $D$ for each field, $E_R(f_i)$, an expected frequency of writes for each field, $E_W(f_i)$, and an expected size of each field $E_S(f_i)$. 
 
 \subsection{Cost model}
-Our cost model assigns a cost to a document configuration $C =$\{$c_1, c_2, ... c_n | c_i = 1 \text{ if field } f_i \in D_R \text{ is embedded }$\} considering expected read time, $R$, write time $W$, and network traffic $T$ under a given workload specification, $S$.
+Our cost model assigns a cost to a document configuration $C =$\{$c_1, c_2, ... c_n | c_i = 1 \text{ if field } f_i \in D_R \text{ is embedded }$\} considering expected read time, $R$, write time $W$, and traffic $T$ under a given workload specification, $S$.
 $$Cost(C,S) = w_R*R + w_W*W + w_T*T$$ 
 The parameters $w_R$ and $w_W$ allow the user to set the importance of the read-time and write-time respectively. 
 For instance, the user may set the $w_R$ higher than $w_W$ in the case that website visitors read documents, but only admins write documents. 
-As we do not consider the network traffic of calls other than those for the given document and it's fields, $w_T$ can be used to adjust the importance of keeping network traffic of these document calls to a minimum. 
+As we do not consider the network traffic of calls other than those for the given document and it's fields, $w_T$ can be used to adjust the importance of keeping the number of messages passed as a result of document calls to a minimum.
 
 \subsubsection{Computing read-time term, $R$}
 The read-time term takes into account the read-times for all document fields and referenced document fields in a given configuration, $C$, for a given workload, $S$. 
@@ -32,58 +32,58 @@ R =& [M + max(E_R(f_i) \forall f_i \in F_1 \cup F_D)*\sum_{f_i \in F_1 \cup F_D}
 & * \sum_{f_i \in D_{R_i} \cap F_0} K*E_S(f_i)\} + P]
 \end{align*}
 The first summation calculates the expected read time for all document fields ($F_D$) and embedded fields ($F_1$). 
-The second summation adds the expected read time for all secondary requests for referrenced documents and all time required to read the fields ($F_0$) of those objects. 
+The second summation adds the expected read time for all secondary requests for referrenced documents and all time required to read the fields ($F_0$) of those documents. 
 Because we assume we read all data from each document when we fetch it, the $max$ terms calculate how many times we need to fetch each document to match the required field reads. 
-Overall, this equation shows us that embedding a field saves read time for secondary requests for referenced documents and their fields. 
-We can see that embedding fields will help decrease read-time in cases where the cost of a secondary request is high, or where the referenced objects are large.
+Overall, this equation shows that embedding a field saves read time for secondary requests incurred by referenced documents and their fields. 
+We can see that embedding fields will decrease read-time in cases where the cost of a secondary request is high, or where the referenced documents are large.
 
 Finally, $P$ is the penalty for inconsistency. 
-If a read occurs before the write data is consistent, the read must recursively reference the referred object. 
-$P$ accounts for the additional time for reacursively referencing the referred object as it was not covered in the other summations. 
-For each embedded object, we add back on the time to retrieve the referenced object multiplied by the chance that the field is read while the data is in consistent, $I(f_i)$, which depends the frequency of writes and reads. 
+If a read occurs before the write data is consistent, the read must recursively reference the referred document. 
+$P$ accounts for the additional time for reacursively referencing the referred document as it was not covered in the other summations. 
+For each embedded document, we add back on the time to retrieve the referenced document multiplied by the chance that the field is read while the data is in consistent, $I(f_i)$, which depends the frequency of writes and reads. 
 Here $D_{R_{F_1}}$ refers to all documents that have an embedded field. 
 $$P = I*\sum_{D_{R_i} \in D_{R_{F_1}}} [M+\sum_{f_i \in D_{R_i}} K*E_S(f_i)*E_R(f_i)]$$
 In our implementation we set $I(f_i) = 0 \forall f_i \in F$. 
 In future work, we will use detailed analysis to figure out how to relate the frequency of writes and reads to the chance that the read data is inconsistent. 
 Like $M$ and $K$, this term will be unique to each system.
 
-\subsubsection{Computing average field write-time $W$}
+\subsubsection{Computing the write-time term $W$}
 The write-time term takes into account the write times for all $f_i \in D, D_R$ for a given configuration $C$ and workload $S$. 
 \begin{align*}
 W =& [\sum_{f_i \in F_1} K*E_S(f_i)*E_W(f_i)\\
 & + \sum_{f_i \in F} K*E_S(f_i)*E_W(f_i)]
 \end{align*}
-The first summation takes into account time for embedded fields, and the second summation counts time for all fields. 
-This is because embedded fields require two writes to update the referenced object and the embedded field whereas referenced objects only take one write. 
+The first summation counts time for embedded fields, and the second summation counts time for all fields. This means embedded fields require two writes to update the referenced document whereas referenced documents only require one write. 
 The write-time term $W$ displays that embedding fields will not be beneficial in write-heavy workloads.
 
-\subsubsection{Computing network traffic, $T$}
+\subsubsection{Computing the traffic term, $T$}
 We add the term $T$ with its weight $w_T$ to allow the user to adjust how important it is to keep the network traffic from PeerDB low. 
-$T$ is the average number of messages passed based on reads and writes. 
+$T$ is the number of messages passed based on reads and writes. 
 \begin{align*}
 T=& 2*|D\text{ reads}| + 2*|D_R\text{ reads}|\\
 & + 4*|\text{embedded writes}| + 2*|\text{referenced writes}| 
 \end{align*}
 
 \subsection{Picking a configuration}
-The total number of possible configurations is equal to $2^n$ where $n$ is the number of fields. 
-In our implemnentation we use a brute force approach to find the configuration with the lowest cost because $n$ is small. 
-In cases where $n$ is large we can apply a greedy algorithm or simulated annealing to find a near-optimal answer.
+The total number of possible configurations for any schema is $2^n$ where $n$ represents the number of fields in referenced documents. 
+In our implemnentation, $n$ is small so we use a brute force approach to find the configuration with the lowest cost. 
+In cases where $n$ is large, we could apply a greedy algorithm or simulated annealing to find a near-optimal answer.
 
 \subsection{Evaluation}
 We implemented our model and tested it on one schema (Figure~\ref{fig:schema}) under several different workload specifications and parameter weightings. 
-First, running our algorithm with this schema and workload specification (Table~\ref{workload}) with the parameter settings $w_R = 1, w_W = 0, w_T = 0$ we get that we should embed author name and author tag, but no other fields. 
-This is not surprising: only considering the read-time term we expect fields often read with post that are not large to be embedded. 
-Author picture is large to read everytime you fetch the document, and it is only read sometimes, so it is left out. 
 
-Setting the parameters to $w_R = 0, w_W = 1, w_T = 0$ (only considering writes), the algorithm tells us to not embed any fields. 
-As every embedded field incurs extra write time, this is not surprising. 
+First, we ran our algorithm with the illustrated schema (Figure~\ref{fig:schema}) and workload specification (Table~\ref{workload}) with the parameter settings $w_R = 1, w_W = 0, w_T = 0$. Under these settings, the algorithm tells us that the lowest cost configuration embeds the author name and tag name, but no other fields. 
+This is not surprising: only considering the read-time term, we expect fields often read with post that are not large to be embedded. 
+The author picture field is large and only occasionally read with $D$.
+As a result, the algorithm does not embed the author picture to avoid fetching it on every post query.
+
+Setting the parameters to $w_R = 0, w_W = 1, w_T = 0$ (only considering writes), the algorithm tells us to not embed any fields, because every embedded field incurs extra write time.
 Finally, setting the parameters to only pay attention to the messages passed, $w_R = 0, w_W = 0, w_T = 1$ we get that we should embed all fields except author bio and tag description. 
-The algorithm picks this configuration because the workload is read heavy, and each non-embedded field requires extra messages to read. 
+The algorithm picks this configuration because we provided a read-heavy workload, and each non-embedded field requires extra messages to read. 
 In this case, if we set the parameters to $w_R = 1, w_W = 1, w_T = 0$ we unsurprisingly get the same configuration as suggested by considering the read time alone. 
 
 However, if we switch the expected read values in the workload specification with the expected write values in the specification and leave the parameters as  $w_R = 1, w_W = 1, w_T = 0$, the algorithm tells us to not embed any fields. %TODO CHECK THIS LAST ONE 
-Overall, our algorithm agrees with intuition in these cases. Such an algorithm can pick the best fields to embed based on a schema and an expected workload specification.
+Overall, our algorithm agrees with intuition in these cases. Such an algorithm can pick the lowest cost fields to embed based on a schema and an expected workload specification.
 
 \begin{figure}[t]
 \centering
