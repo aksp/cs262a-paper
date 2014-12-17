@@ -25,12 +25,12 @@ This allows you (or a framework you use) to respond to this changes in data.
 For example, update a rendered template in a browser.
 Programming in this way becomes much more declarative.
 
-The downside is complexity a programer is faced with when making queries with joins.
+The downside is complexity a programmer is faced with when making queries with joins.
 While frameworks provide a simple to use primitive for making reactive queries against one MongoDB collection and receiving updates to documents in that collection as they are made for the open query, programming how manually resolved relations should respond to those updates in data is far from straightforward.
 Community is slowly building libraries which are aiming to address these issues, but current solutions are made for specific type of queries and all share a common issue based on previously mentioned downside of manually resolving queries: high latency and number of queries.
 As query results data is changed, queries for related documents have to be rerun again and again, even if the results of those new queries might not be different to previous ones, or even if only a smaller query for just a subset of documents would satisfy.
 
-Thus, combination of joins in NoSQL databases with reactive queries pose a challenge to programers.
+Thus, combination of joins in NoSQL databases with reactive queries pose a challenge to programmers.
 Luckily, we can observe that in many cases we are mostly interested only in few fields of a related document, again and again.
 Instead of recomputing joins every time we read, we could use MongoDB's sub-documents feature to embed those fields along with the reference.
 Instead of just storing the \verb|_id| of a related document, we could store also those few often used fields.

@@ -86,6 +86,9 @@ However, if we switch the expected read values in the workload specification wit
 
 Overall, our algorithm agrees with intuition in these cases. Such an algorithm can pick the lowest cost fields to embed based on a schema and an expected workload specification.
 
+\subsection{Implementation}
+This algorithm was implemented in unoptimized Python code on a MacBook Pro. Each run of the algorithm to consider all embeddings and return the lowest cost configuration took around ~2ms.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.33in]{figures/algorithm-schema.pdf}
